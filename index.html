@@ -3,118 +3,152 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-body { font-family:sans-serif; padding:15px; }
-.hidden { display:none; }
+  body {
+    font-family:sans-serif;
+    padding:15px;
+    background-color: gray;
+  }
 
-/* 卓 */
-.top { display:flex; align-items:center; gap:12px; }
+  .hidden {
+    display:none;
+  }
 
-#table {
-  min-width:160px;
-  padding:8px;
-  font-size:16px;
-}
+  /* 卓 */
+  .top {
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
 
-/* グリッド */
-.grid {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
+  #table {
+    min-width:160px;
+    padding:8px;
+    font-size:16px;
+  }
 
-/* カード */
-.card {
-  border:2px solid #ccc;
-  padding:10px;
-  width:30%;
-  min-width:90px;
-  text-align:center;
-  border-radius:10px;
-  transition:0.2s;
-}
+  /* グリッド */
+  .grid {
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
 
-.card:hover { transform:scale(1.05); }
+  /* カード */
+  .card {
+    border:2px solid #ccc;
+    padding:10px;
+    width:30%;
+    min-width:90px;
+    text-align:center;
+    border-radius:10px;
+    transition:0.2s;
+  }
 
-input { display:none; }
+  .card:hover {
+    transform:scale(1.05);
+  }
 
-input:checked + .card {
-  border-color:#4cafef;
-  background:#e3f2fd;
-}
+  input {
+    display:none;
+  }
 
-/* 色 */
-.red { background:#ffe5e5; border-color:#ff8a8a; }
-.green { background:#e5ffe5; border-color:#7edc7e; }
-.white { background:#f5f5f5; }
-.blue { background:#e5f0ff; border-color:#7fb3ff; }
-.black { background:#eeeeee; border-color:#999; }
+  input:checked + .card {
+    border-color:#4cafef;
+    background:#e3f2fd;
+  }
 
-/* サワー余白 */
-.sour-area { margin-bottom:20px; }
+  /* 色 */
+  .red {
+    background:#ffe5e5;
+    border-color:#ff8a8a;
+  }
 
-/* ボタン */
-button {
-  margin:5px;
-  padding:12px 18px;
-  border-radius:10px;
-  font-size:16px;
-}
+  .green {
+    background:#e5ffe5;
+    border-color:#7edc7e;
+  }
 
-/* オリジナルボタンON */
-#originalBtn.active {
-  background:#4cafef;
-  color:white;
-}
+  .white {
+    background:#f5f5f5;
+  }
 
-/* モーダル */
-.modal {
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.5);
-  display:none;
-}
+  .blue {
+    background:#e5f0ff;
+    border-color:#7fb3ff;
+  }
 
-.modal-content {
-  background:white;
-  margin:10% auto;
-  padding:20px;
-  width:90%;
-  max-width:400px;
-  border-radius:12px;
-}
+  .black {
+    background:#eeeeee;
+    border-color:#999;
+  }
 
-/* カート */
-.cart-item {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin:10px 0;
-}
+  /* サワー余白 */
+  .sour-area {
+    margin-bottom:20px;
+  }
 
-.drink-name {
-  flex:1;
-  text-align:center;
-}
+  /* ボタン */
+  button {
+    margin:5px;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:16px;
+  }
 
-.qty-area {
-  display:flex;
-  align-items:center;
-  gap:5px;
-}
+  /* オリジナルボタンON */
+  #originalBtn.active {
+    background:#4cafef;
+    color:white;
+  }
 
-.qty-btn {
-  width:40px;
-  height:40px;
-}
+  /* モーダル */
+  .modal {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:rgba(0,0,0,0.5);
+    display:none;
+  }
 
-.delete-btn {
-  background:red;
-  color:white;
-}
+  .modal-content {
+    background:white;
+    margin:10% auto;
+    padding:20px;
+    width:90%;
+    max-width:400px;
+    border-radius:12px;
+  }
+
+  /* カート */
+  .cart-item {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin:10px 0;
+  }
+
+  .drink-name {
+    flex:1;
+    text-align:center;
+  }
+
+  .qty-area {
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+
+  .qty-btn {
+    width:40px;
+    height:40px;
+  }
+
+  .delete-btn {
+    background:red;
+    color:white;
+  }
 </style>
 </head>
 
@@ -132,7 +166,6 @@ button {
 
 <!-- 通常 -->
 <div id="normalArea">
-
 <h3>リキュール①</h3>
 <div id="l1Area" class="grid"></div>
 
@@ -141,8 +174,8 @@ button {
 
 <h3>サワー</h3>
 <div class="grid sour-area">
-<label><input type="radio" name="sour" value="あり"><div class="card">あり</div></label>
-<label><input type="radio" name="sour" value="なし"><div class="card">なし</div></label>
+<label><input type="radio" name="sour" value="あり"><div class="card white">あり</div></label>
+<label><input type="radio" name="sour" value="なし"><div class="card white">なし</div></label>
 </div>
 </div>
 
@@ -152,8 +185,8 @@ button {
 <div id="originalList"></div>
 </div>
 
-<button onclick="addToCart()">追加</button>
-<button onclick="openCart()">注文確認</button>
+<button id="addBtn" onclick="addToCart()">追加</button>
+<button id="orderCheckBtn" onclick="openCart()">注文確認</button>
 
 </div>
 
@@ -163,7 +196,7 @@ button {
     <h3>注文確認</h3>
     <div id="cartList"></div>
     <button id="sendBtn" onclick="sendOrder()">送信</button>
-    <button onclick="closeCart()">閉じる</button>
+    <button id="closeBtn" onclick="closeCart()">閉じる</button>
   </div>
 </div>
 
@@ -185,6 +218,7 @@ fetch(API_URL)
   render("l1Area","l1",data.liqueur);
   render("l2Area","l2",data.liqueur);
   renderOriginal(data.original);
+  checkOrder();
 });
 
 /* 卓 */
@@ -257,6 +291,18 @@ function getSelected(n){
   return el?el.value:null;
 }
 
+/* Ordercheker */
+function checkOrder(){
+
+  if (cart.length === 0) {
+    // Not Order
+    document.getElementById("orderCheckBtn").setAttribute("disabled", true);
+  } else {
+    // Set Order
+    document.getElementById("orderCheckBtn").removeAttribute("disabled");
+  }
+}
+
 /* 追加 */
 function addToCart(){
   let name="";
@@ -270,7 +316,9 @@ function addToCart(){
     const l2=getSelected("l2");
     const s=getSelected("sour");
 
-    if(!l1||!l2||!s) return alert("全部選んで！");
+    if(!l1||!l2||!s){
+      return alert("全部選んで！");
+    }
 
     const type = (s==="あり") ? "サワー" : "カクテル";
     name=`${l1}${l2}${type}`;
@@ -286,6 +334,9 @@ function addToCart(){
   if(isOriginal){
     toggleOriginal();
   }
+
+  // ここで呼ぶ
+  checkOrder();
 }
 
 /* カート */
@@ -306,6 +357,8 @@ function openCart(){
   });
 
   cartModal.style.display="block";
+
+  checkOrder();
 }
 
 function closeCart(){ cartModal.style.display="none"; }
@@ -332,6 +385,7 @@ function sendOrder(){
   }).then(()=>{
     cart=[];
     closeCart();
+    checkOrder();
   });
 }
 </script>
