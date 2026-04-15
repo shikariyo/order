@@ -1,10 +1,14 @@
-// GoogleスプレットシートのマクロURL
+/**
+ * NAKIYA BAR オーダーシート用メインスクリプト
+ */
+
+/* GoogleスプレットシートのマクロURL */
 const API_URL = "https://script.google.com/macros/s/AKfycbx3Z88Rj0Qo4HUSKVA-Yc5LHhHiMTYHO54Q-9n6NbXqGAdOYx9HOAHGaIKriWfBd8vN/exec";
 
-// カート（注文済カクテルAry）
+/* カート（注文済カクテルAry） */
 let cart= [];
 
-// オリジナルカクテル用フラグ
+/* オリジナルカクテル用フラグ */
 let isOriginal= false;
 
 /**
@@ -29,7 +33,6 @@ fetch(API_URL)
 
 /**
  * 選択した卓の値を保持。
- *
  */
 function onTableSelect(){
     const t = table.value;
@@ -55,16 +58,16 @@ function getColorClass(name){
 
 /**
  * リキュールの色に応じて、ボタンのHTMLを挿入
- * TODO interHTMLやめたいな。なんかいい方法ないかな｡｡｡
  *
  * @param   id      挿入先のタグid
  * @param   name    ボタンに指定する値
- * @param   data    XXX
+ * @param   data    スプレットシートから受け取ったデータ
  */
 function render(id,name,data){
     const el=document.getElementById(id);
     el.innerHTML="";
 
+    // TODO 重くなる原因なので、interHTMLやめたい。いい方法見つかるまではそのままで
     data.forEach(item=>{
         const color= getColorClass(item[0]);
 
@@ -80,13 +83,14 @@ function render(id,name,data){
 }
 
 /**
- *  オリジナルカクテル用のボタンHTMLを挿入
- * TODO interHTMLやめたいな。なんかいい方法ないかな｡｡｡
+ * オリジナルカクテル用のボタンHTMLを挿入
  *
- *　@param   data    XXX
+ * @param   data    スプレットシートから受け取ったデータ
  */
 function renderOriginal(data){
     originalList.innerHTML="";
+
+    // TODO 重くなる原因なので、interHTMLやめたい。いい方法見つかるまではそのままで
     data.forEach(item=>{
         originalList.innerHTML+=`
     <label>
@@ -100,9 +104,9 @@ function renderOriginal(data){
 }
 
 /**
- * エフェクト
- * TODO こいつなにやってるかわからん。あとでコメント書く。
+ * 選択したボタンにエフェクト付与（選択したという色を着ける）処理
  *
+ * @param   el  選択中したボタン情報
  */
 function selectOriginalEffect(el){
     el.nextElementSibling.style.boxShadow="0 0 10px #4cafef";
@@ -209,11 +213,11 @@ function addToCart(){
 
 /**
  * カートの内容をダイアログ表示する
- * TODO interHTMLやめたいな。なんかいい方法ないかな｡｡｡
  */
 function openCart(){
     cartList.innerHTML = "";
 
+    // TODO 重くなる原因なので、interHTMLやめたい。いい方法見つかるまではそのままで
     cart.forEach((c,i)=>{
         cartList.innerHTML+=`
     <div class="cart-item">
@@ -229,41 +233,46 @@ function openCart(){
 
     cartModal.style.display = "block";
 
-    // TODO ここのチェック処理、実はいらないんじゃね？
+    // TODO ここのチェック処理、実はいらないかも？
     checkOrder();
 }
 
 /**
- *
+ * 表示中のカート内容ダイアログを閉じる
  */
 function closeCart(){
     cartModal.style.display = "none";
 }
 
 /**
+ * カート内のメニュー個数変更処理
  *
- * @param   i   XXX
- * @param   d   XXX
+ * @param   i   メニュー（上から何番目のメニューか）
+ * @param   d   メニュー増減数（減らす場合はマイナスの値を渡す）
  */
 function changeQty(i,d){
+    // メニュー増減
     cart[i].qty += d;
+
+    // 個数0以下になったら、メニュー項目ごと削除
     if (cart[i].qty<=0) {
         cart.splice(i,1);
     }
 
-    // TODO これもしかして、カートの状態確認してからHTML組み直してる？やばない？
+    // TODO カートの状態確認してからHTML組み直してそう。メニューが増えると処理が急激に重くなるかもしれない
     openCart();
 }
 
 /**
- *　カート内のアイテム削除処理
+ *　カート内のメニュー削除処理
  *
- * @param   i   XXX
+ * @param   i   メニュー（上から何番目のメニューか）
  */
 function removeItem(i){
+    // メニュー項目ごと削除
     cart.splice(i,1);
 
-    // TODO これもしかして、カートの状態確認してからHTML組み直してる？やばない？
+    // TODO カートの状態確認してからHTML組み直してそう。メニューが増えると処理が急激に重くなるかもしれない
     openCart();
 }
 
